@@ -722,7 +722,8 @@
           <p>1. 世界の空気 → 2. 勢力の一覧 → 3. 関係図と歴史、の順で理解しやすくしています。</p>
         </div>
         <div class="stats">
-          <div class="stat"><b>18</b><span>接続先</span></div>
+          <!-- 接続先数を動的に管理 -->
+          <div class="stat"><b id="connection-count">0</b><span>接続先</span></div>
           <div class="stat"><b>7</b><span>勢力軸</span></div>
           <div class="stat"><b>1</b><span>統合世界</span></div>
         </div>
@@ -760,7 +761,7 @@
           <h3>世界一覧</h3>
           <p>各カードから元サイトへ直接移動できます。</p>
         </div>
-        <div class="hint" id="count">17件表示</div>
+        <div class="hint" id="count">0件表示</div>
       </div>
       <div class="grid" id="grid"></div>
     </section>
@@ -988,17 +989,17 @@
         type: 'project',
         category: '放送 / メディア',
         status: 'green',
-        summary: '和温陣国の国内放送。　様々な最新情報を国民に伝えるとともに、国家の文化を国外に発信する役割もある重要なメディアです。',
+        summary: '和温陣国の国内放送。様々な最新情報を国民に伝えるとともに、国家の文化を国外に発信する役割もある重要なメディアです。',
         url: 'https://ec2045.github.io/WZN/',
         tags: ['放送', 'メディア', '和温陣国']
       },
-            {
+      {
         name: 'The-Bible-of-Kneaded-Erasers',
         jp: '練里消詩教',
         type: 'project',
         category: '宗教',
         status: 'green',
-        summary: '和温陣国の国内放送。　様々な最新情報を国民に伝えるとともに、国家の文化を国外に発信する役割もある重要なメディアです。',
+        summary: '「世界は練り消しのようなまとまりを持つべきだ」という思想をもつ宗教団体。経典である「練里消詩教」は世界を柔軟に捉えるための教えを説いています',
         url: 'https://ec2045.github.io/The-Bible-of-Kneaded-Erasers/',
         tags: ['宗教', '練り消し', '経典']
       }
@@ -1017,6 +1018,7 @@
     const filter = document.getElementById('filter');
     const sort = document.getElementById('sort');
     const count = document.getElementById('count');
+    const connectionCount = document.getElementById('connection-count');
     const loader = document.getElementById('loader');
 
     function escapeHtml(str) {
@@ -1025,11 +1027,15 @@
       }[s]));
     }
 
+    /**
+     * レンダリング処理
+     */
     function render() {
       const q = search.value.trim().toLowerCase();
       const f = filter.value;
       const s = sort.value;
 
+      // フィルタリング
       let list = worlds.filter(w => {
         const hay = [w.name, w.jp, w.category, w.summary, ...(w.tags || [])].join(' ').toLowerCase();
         const okSearch = !q || hay.includes(q);
@@ -1037,9 +1043,14 @@
         return okSearch && okFilter;
       });
 
-      if (s === 'name') list.sort((a, b) => a.name.localeCompare(b.name, 'ja'));
-      else if (s === 'type') list.sort((a, b) => (a.type + a.name).localeCompare(b.type + b.name, 'ja'));
+      // ソート
+      if (s === 'name') {
+        list.sort((a, b) => a.name.localeCompare(b.name, 'ja'));
+      } else if (s === 'type') {
+        list.sort((a, b) => (a.type + a.name).localeCompare(b.type + b.name, 'ja'));
+      }
 
+      // カード表示生成
       grid.innerHTML = list.map(w => `
         <article class="card">
           <div class="badge-row">
@@ -1057,18 +1068,26 @@
         </article>
       `).join('');
 
+      // 表示件数と総接続数の更新
       count.textContent = `${list.length} 件表示`;
+      connectionCount.textContent = worlds.length;
     }
 
+    // イベントリスナー
     search.addEventListener('input', render);
     filter.addEventListener('change', render);
     sort.addEventListener('change', render);
 
-    render();
-
-    window.addEventListener('load', () => {
-      setTimeout(() => loader.classList.add('hide'), 900);
-    });
+    // 初期化
+    window.onload = function() {
+      // ローダー解除
+      setTimeout(() => {
+        loader.classList.add('hide');
+      }, 900);
+      
+      // 最初のレンダリング
+      render();
+    };
   </script>
 </body>
 

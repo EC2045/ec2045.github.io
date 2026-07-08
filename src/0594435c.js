@@ -288,7 +288,37 @@ const worlds = [
     summary: '「世界は練り消しのようなまとまりを持つべきだ」という思想をもつ宗教団体。経典である「練里消詩教」は世界を柔軟に捉えるための教えを説いています',
     url: 'https://ec2045.github.io/The-Bible-of-Kneaded-Erasers/',
     tags: ['宗教', '練り消し', '経典']
-  }
+  },
+    {
+    name: '2045font',
+    jp: '2045フォント',
+    type: 'project',
+    category: 'フォント',
+    status: 'green',
+    summary: '東暦2045で使われるフォントの公式サイト',
+    url: 'https://ec2045.github.io/2045font/',
+    tags: ['フォント', '文字', '文化']
+  },
+  {
+    name: '!byaren Exchange ',
+    jp: '!byaren 交換公式サイト',
+    type: 'project',
+    category: 'サイト',
+    status: 'green',
+    summary: 'onvaの市場価値がわかるサイト',
+    url: 'https://ec2045.github.io/2045font/',
+    tags: ['国家', '経済', '通貨']
+  },
+  {
+    name: 'RAC',
+    jp: '生物アーカイブ',
+    type: 'project',
+    category: 'アーカイブ',
+    status: 'green',
+    summary: '生命体や、異常存在、異常現象をまとめたサイト。',
+    url: 'https://ec2045.github.io/RAC/',
+    tags: ['国家', '経済', '通貨']
+  },
 ];
 
 

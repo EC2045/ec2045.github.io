@@ -319,6 +319,16 @@ const worlds = [
     url: 'https://ec2045.github.io/RAC/',
     tags: ['国家', '経済', '通貨']
   },
+    {
+    name: 'Faarai',
+    jp: 'ファイラ語',
+    type: 'project',
+    category: '言語',
+    status: 'green',
+    summary: 'きかんほ（吸気音）により、無限に会話が可能な言語ファライ語を紹介するサイト（理論上は）,
+    url: 'https://ec2045.github.io/RAC/',
+    tags: ['国家', '経済', '通貨']
+  }
 ];
 
 

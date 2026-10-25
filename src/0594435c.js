@@ -129,6 +129,16 @@ const worlds = [
     url: 'https://ec2045.github.io/onva-history/',
     tags: ['国家', '歴史', '記録']
   },
+    {
+    name: 'onva-history',
+    jp: '世界・歴史資料',
+    type: 'archive',
+    category: '世界 / 歴史',
+    status: 'green',
+    summary: '世界の歴史をまとめたサイト。',
+    url: 'https://ec2045.github.io/World-History/history.pdf',
+    tags: ['世界', '歴史', '記録']
+  },
   {
     name: 'onva-s_creature',
     jp: 'onva・生物資料',

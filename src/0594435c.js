@@ -110,6 +110,66 @@ const worlds = [
     tags: ['言語', '文法', '練習用']
   },
   {
+    name: 'Shellvail',
+    jp: 'シェルヴァイル語',
+    type: 'archive',
+    category: '言語 / 文法',
+    status: 'green',
+    summary: 'シェルヴァイル語の文法・文字体系・語彙をまとめた言語資料。',
+    url: 'https://ec2045.github.io/shellvail/',
+    tags: ['言語', '文法', '文字体系']
+  },
+  {
+    name: 'Syeria',
+    jp: 'シェリア語',
+    type: 'archive',
+    category: '言語 / 文法',
+    status: 'green',
+    summary: 'シェリア語の文法と語彙を学ぶための言語資料。',
+    url: 'https://ec2045.github.io/syeria/',
+    tags: ['言語', '文法', '辞書']
+  },
+  {
+    name: 'Kana-Kanu',
+    jp: 'カナーカヌ語',
+    type: 'archive',
+    category: '言語 / 文法',
+    status: 'green',
+    summary: '発音・文法・文字入力をまとめたカナーカヌ語ガイド。',
+    url: 'https://ec2045.github.io/kana-kanu/',
+    tags: ['言語', '発音', '文法']
+  },
+  {
+    name: '2045japanese',
+    jp: '日本語2045',
+    type: 'archive',
+    category: '言語 / 文法',
+    status: 'green',
+    summary: '日本語2045の文法書と「桃太郎」を掲載する言語資料。',
+    url: 'https://ec2045.github.io/2045japanese/',
+    tags: ['言語', '文法', '物語']
+  },
+  {
+    name: 'Modern English',
+    jp: 'Modern English 文法資料',
+    type: 'archive',
+    category: '言語 / 文法',
+    status: 'green',
+    summary: 'Modern Englishの文法を参照できるガイド。',
+    url: 'https://ec2045.github.io/2045english/',
+    tags: ['言語', '英語', '文法']
+  },
+  {
+    name: 'OS-V',
+    jp: 'OS-V語',
+    type: 'archive',
+    category: '言語 / 学習',
+    status: 'green',
+    summary: 'OS-V語の文法・辞書・学習教材・翻訳機能を備えた公式サイト。',
+    url: 'https://ec2045.github.io/os-v/',
+    tags: ['言語', '辞書', '学習']
+  },
+  {
     name: 'ONVA Culture',
     jp: 'ONVA文化アーカイブ',
     type: 'archive',
@@ -121,7 +181,7 @@ const worlds = [
   },
   {
     name: 'onva-history',
-    jp: 'onva語・歴史資料',
+    jp: 'onva王国の歴史資料',
     type: 'archive',
     category: '国家 / 歴史',
     status: 'green',
@@ -130,8 +190,8 @@ const worlds = [
     tags: ['国家', '歴史', '記録']
   },
     {
-    name: 'onva-history',
-    jp: '世界・歴史資料',
+    name: 'World-History',
+    jp: '世界史年表',
     type: 'archive',
     category: '世界 / 歴史',
     status: 'green',
@@ -220,6 +280,16 @@ const worlds = [
     tags: ['歴史', '年表', '記録']
   },
   {
+    name: 'WST-TIME',
+    jp: '東暦標準時時計・カレンダー',
+    type: 'project',
+    category: '時間 / 暦',
+    status: 'green',
+    summary: '東暦の標準時とカレンダーを確認できる時計・暦サイト。',
+    url: 'https://ec2045.github.io/WST-TIME/',
+    tags: ['東暦', '時計', 'カレンダー']
+  },
+  {
     name: 'E4 CLOUD SERVICE',
     jp: '内部暗号化データストレージ',
     type: 'archive',
@@ -238,6 +308,16 @@ const worlds = [
     summary: '均衡と調和、秩序ある混沌を掲げる国家。ピクセル陰陽を核に、杖文化と王の儀礼で国家の理を保つ世界です。',
     url: 'https://ec2045.github.io/Waon-Jinkoku/',
     tags: ['国家', '調和', '杖文化']
+  },
+  {
+    name: 'Waonjin Weather Forecast',
+    jp: '和温陣国 気象庁・天気予報',
+    type: 'project',
+    category: '国家 / 気象',
+    status: 'green',
+    summary: '和温陣国の天気予報を確認する気象情報サイト。',
+    url: 'https://ec2045.github.io/waon-weather-forecast/',
+    tags: ['和温陣国', '天気', '気象']
   },
   {
     name: 'Waonjin-Ecosystem-Observatory',
@@ -310,34 +390,34 @@ const worlds = [
     tags: ['フォント', '文字', '文化']
   },
   {
-    name: '!byaren Exchange ',
+    name: '!byaren Exchange',
     jp: '!byaren 交換公式サイト',
     type: 'project',
-    category: 'サイト',
+    category: '経済 / 通貨',
     status: 'green',
-    summary: 'onvaの市場価値がわかるサイト',
-    url: 'https://ec2045.github.io/2045font/',
-    tags: ['国家', '経済', '通貨']
+    summary: 'onvaの市場価値を確認できる交換レートサイト。',
+    url: 'https://ec2045.github.io/onva-rate/',
+    tags: ['経済', '通貨', 'onva']
   },
   {
     name: 'RAC',
-    jp: '生物アーカイブ',
-    type: 'project',
-    category: 'アーカイブ',
+    jp: '生物・異常現象アーカイブ',
+    type: 'archive',
+    category: '生命 / 異常存在',
     status: 'green',
-    summary: '生命体や、異常存在、異常現象をまとめたサイト。',
+    summary: '生命体、異常存在、異常現象を記録するアーカイブ。',
     url: 'https://ec2045.github.io/RAC/',
-    tags: ['国家', '経済', '通貨']
+    tags: ['生命', '異常存在', 'アーカイブ']
   },
     {
     name: 'Faarai',
     jp: 'ファイラ語',
-    type: 'project',
-    category: '言語',
+    type: 'archive',
+    category: '言語 / 文法',
     status: 'green',
-    summary: 'きかんほ（吸気音）により、無限に会話が可能な言語ファライ語を紹介するサイト（理論上は）',
-    url: 'https://ec2045.github.io/RAC/',
-    tags: ['国家', '経済', '通貨']
+    summary: '吸気音「きかんほ」を用いるファイラ語を紹介する言語資料。',
+    url: 'https://ec2045.github.io/faira/',
+    tags: ['言語', '音声', '文法']
   }
 ];
 

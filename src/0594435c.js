@@ -422,13 +422,7 @@ const worlds = [
 ];
 
 
-const icons = {
-  organization: '◼',
-  archive: '⌁',
-  person: '◉',
-  project: '✦'
-};
-
+const icons = { organization: '◼', archive: '⌁', person: '◉', project: '✦' };
 const grid = document.getElementById('grid');
 const search = document.getElementById('search');
 const filter = document.getElementById('filter');
@@ -436,71 +430,88 @@ const sort = document.getElementById('sort');
 const count = document.getElementById('count');
 const connectionCount = document.getElementById('connection-count');
 const loader = document.getElementById('loader');
-
-function escapeHtml(str) {
-  return String(str).replace(/[&<>"']/g, s => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-  }[s]));
+const languageSelect = document.getElementById('portal-language');
+const localeData = window.PORTAL_LOCALES;
+const preferenceKey = 'ec2045-basic-language';
+let language = 'ja';
+function readPreference() {
+  try { return localStorage.getItem(preferenceKey); } catch { return null; }
 }
-
-/**
- * レンダリング処理
- */
+function browserLanguage() {
+  return (navigator.languages || [navigator.language]).map(value => value.toLowerCase().split('-')[0]).find(value => ['ja', 'en'].includes(value)) || 'ja';
+}
+function text(key) { return localeData.static[key][language]; }
+function localise(world, lang = language) {
+  return lang === 'en' ? { ...world, ...localeData.cards[world.name] } : world;
+}
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, character => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[character]));
+}
 function render() {
-  const q = search.value.trim().toLowerCase();
-  const f = filter.value;
-  const s = sort.value;
-
-  // フィルタリング
-  let list = worlds.filter(w => {
-    const hay = [w.name, w.jp, w.category, w.summary, ...(w.tags || [])].join(' ').toLowerCase();
-    const okSearch = !q || hay.includes(q);
-    const okFilter = f === 'all' || w.type === f;
-    return okSearch && okFilter;
+  const query = search.value.trim().toLocaleLowerCase(language);
+  const type = filter.value;
+  const list = worlds.filter(world => {
+    // Search both languages so a query remains useful after changing the display.
+    const english = localise(world, 'en');
+    const haystack = [world.name, world.jp, world.category, world.summary, ...world.tags,
+      english.jp, english.category, english.summary, ...english.tags].join(' ').toLocaleLowerCase(language);
+    return (!query || haystack.includes(query)) && (type === 'all' || world.type === type);
   });
-
-  // ソート
-  if (s === 'name') {
-    list.sort((a, b) => a.name.localeCompare(b.name, 'ja'));
-  } else if (s === 'type') {
-    list.sort((a, b) => (a.type + a.name).localeCompare(b.type + b.name, 'ja'));
-  }
-
-  // カード表示生成
-  grid.innerHTML = list.map(w => `
-        <article class="card">
-          <div class="badge-row">
-            <span class="badge">${icons[w.type] || '•'} ${escapeHtml(w.category)}</span>
-            <span class="status ${w.status}">${escapeHtml(w.type.toUpperCase())}</span>
-          </div>
-          <h4>${escapeHtml(w.name)}</h4>
-          <div class="jp">${escapeHtml(w.jp)}</div>
-          <p class="desc">${escapeHtml(w.summary)}</p>
-          <div class="badge-row">${w.tags.map(t => `<span class="badge"># ${escapeHtml(t)}</span>`).join('')}</div>
-          <div class="card-footer">
-            <a class="linkbtn" href="${w.url}" target="_blank" rel="noopener noreferrer">開く →</a>
-            <span class="hint">${escapeHtml(w.category)}</span>
-          </div>
-        </article>
-      `).join('');
-
-  // 表示件数と総接続数の更新
-  count.textContent = `${list.length} 件表示`;
+  const collator = new Intl.Collator(language, { sensitivity: 'base' });
+  if (sort.value === 'name') list.sort((a, b) => collator.compare(a.name, b.name));
+  if (sort.value === 'type') list.sort((a, b) => collator.compare(text(a.type), text(b.type)) || collator.compare(a.name, b.name));
+  grid.innerHTML = list.length ? list.map(original => {
+    const world = localise(original);
+    return `
+      <article class="card">
+        <div class="badge-row">
+          <span class="badge">${icons[world.type]} ${escapeHtml(world.category)}</span>
+          <span class="status ${world.status}">${escapeHtml(text(world.type))}</span>
+        </div>
+        <h4>${escapeHtml(world.name)}</h4>
+        <div class="jp">${escapeHtml(world.jp)}</div>
+        <p class="desc">${escapeHtml(world.summary)}</p>
+        <div class="badge-row">${world.tags.map(tag => `<span class="badge"># ${escapeHtml(tag)}</span>`).join('')}</div>
+        <div class="card-footer">
+          <a class="linkbtn" href="${escapeHtml(world.url)}" target="_blank" rel="noopener noreferrer">${text('open')}</a>
+          <span class="hint">${escapeHtml(world.category)}</span>
+        </div>
+      </article>`;
+  }).join('') : `<p class="empty-results">${text('empty')}</p>`;
+  count.textContent = language === 'en'
+    ? `${list.length} ${list.length === 1 ? 'destination' : 'destinations'} shown`
+    : `${list.length} 件表示`;
   connectionCount.textContent = worlds.length;
 }
-
-// イベントリスナー
+function applyLanguage(choice) {
+  language = choice === 'auto' ? browserLanguage() : choice;
+  document.documentElement.lang = language;
+  document.querySelectorAll('[data-i18n]').forEach(element => {
+    element.textContent = text(element.dataset.i18n);
+  });
+  search.placeholder = text('searchPlaceholder');
+  languageSelect.setAttribute('aria-label', text('languageLabel'));
+  document.querySelector('.controls').setAttribute('aria-label', text('controlsLabel'));
+  document.querySelectorAll('meta[name="description"],meta[property="og:description"]').forEach(meta => meta.content = text('metadata'));
+  render();
+}
+const urlChoice = new URL(location.href).searchParams.get('lang');
+const savedChoice = readPreference();
+languageSelect.value = ['ja', 'en', 'auto'].includes(urlChoice) ? urlChoice
+  : ['ja', 'en', 'auto'].includes(savedChoice) ? savedChoice : 'auto';
+applyLanguage(languageSelect.value);
+languageSelect.addEventListener('change', () => {
+  const choice = languageSelect.value;
+  try { localStorage.setItem(preferenceKey, choice); } catch {}
+  const url = new URL(location.href);
+  if (choice === 'auto') url.searchParams.delete('lang'); else url.searchParams.set('lang', choice);
+  history.replaceState(null, '', url);
+  applyLanguage(choice);
+});
+window.addEventListener('languagechange', () => { if (languageSelect.value === 'auto') applyLanguage('auto'); });
 search.addEventListener('input', render);
 filter.addEventListener('change', render);
 sort.addEventListener('change', render);
-
-// 初期化
-window.onload = function () {
-  // ローダー解除
-  setTimeout(() => {
-    loader.classList.add('hide');
-  }, 900);
-
-  // 最初のレンダリング
-  render();
-};
+window.addEventListener('load', () => { setTimeout(() => loader.classList.add('hide'), 900); }, { once: true });

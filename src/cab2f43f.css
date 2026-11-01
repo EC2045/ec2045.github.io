@@ -635,3 +635,29 @@ input::placeholder {
     grid-template-columns: 1fr
   }
 }
+/* Keep the language control within the existing navigation at every width. */
+.language-picker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 10px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  font-size: 12px;
+}
+.language-picker select {
+  width: auto;
+  min-width: 98px;
+  padding: 6px 8px;
+}
+.empty-results {
+  grid-column: 1 / -1;
+  padding: 24px;
+  text-align: center;
+}
+html[lang="en"] .hero-main h2 { letter-spacing: -.035em; }
+html[lang="en"] .card h4 { overflow-wrap: anywhere; }
+@media (max-width: 720px) {
+  .topbar { flex-wrap: wrap; }
+  .nav { width: 100%; }
+}

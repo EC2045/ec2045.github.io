@@ -1,3 +1,5 @@
+(async () => {
+await window.PORTAL_LOCALES_READY;
 const worlds = [
   {
     name: 'Symbolencyclopedia',
@@ -515,3 +517,6 @@ search.addEventListener('input', render);
 filter.addEventListener('change', render);
 sort.addEventListener('change', render);
 window.addEventListener('load', () => { setTimeout(() => loader.classList.add('hide'), 900); }, { once: true });
+
+
+})().catch(error => console.error("[portal-i18n]", error));

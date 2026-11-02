@@ -516,7 +516,9 @@ window.addEventListener('languagechange', () => { if (languageSelect.value === '
 search.addEventListener('input', render);
 filter.addEventListener('change', render);
 sort.addEventListener('change', render);
-window.addEventListener('load', () => { setTimeout(() => loader.classList.add('hide'), 900); }, { once: true });
+const hideLoader = () => setTimeout(() => loader.classList.add('hide'), 900);
+if (document.readyState === 'complete') hideLoader();
+else window.addEventListener('load', hideLoader, { once: true });
 
 
 })().catch(error => console.error("[portal-i18n]", error));

@@ -1,6 +1,34 @@
 (async () => {
 await window.PORTAL_LOCALES_READY;
 const worlds = [
+{
+  "name": "Toreki IT Atlas",
+  "jp": "東暦IT案内",
+  "type": "archive",
+  "category": "IT / 技術",
+  "status": "blue",
+  "summary": "携帯通信環、PC、Lunade OS、Womiz OS、衛星通信を紹介する東暦の技術ガイド。",
+  "url": "https://ec2045.github.io/it/",
+  "tags": [
+    "IT",
+    "OS",
+    "衛星通信"
+  ]
+},
+{
+  "name": "MONSANPAS",
+  "jp": "モンサンパス公式サイト",
+  "type": "organization",
+  "category": "企業 / IT",
+  "status": "blue",
+  "summary": "和温陣国のモンサンパス家によるIT企業群。東暦ITの49％を担い、Lunade OS・PC・通信環を手がける。",
+  "url": "https://ec2045.github.io/monsanpas/",
+  "tags": [
+    "企業",
+    "IT",
+    "Lunade OS"
+  ]
+},
   {
     name: 'Symbolencyclopedia',
     jp: '架空疑問展 | 記号アーカイブ',

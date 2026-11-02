@@ -1,0 +1,51 @@
+{
+  "world": "東暦",
+  "status": "confirmed",
+  "family": {
+    "name": "モンサンパス家",
+    "country": "和温陣国",
+    "children": [
+      {
+        "name": "結菜",
+        "relationship_to_rijes": "知り合い"
+      },
+      {
+        "name": "莉奈",
+        "relationship_to_rijes": "知り合い"
+      }
+    ],
+    "notes": "親の個人名・年齢・出生順・結菜と莉奈の役職は未設定。"
+  },
+  "industry": {
+    "monsanpas_share": 49,
+    "unit": "percent",
+    "scope": "東暦のIT産業",
+    "note": "OS単体の利用率ではない。集計方法は未設定。"
+  },
+  "systems": {
+    "Lunade OS": {
+      "developer": "モンサンパス企業群",
+      "devices": [
+        "PC",
+        "携帯通信環"
+      ]
+    },
+    "Womiz OS": {
+      "position": "西暦のLinuxに近い立場",
+      "character": "自由な開発・改変・共有を軸にしたOSの生態系",
+      "owned_by_monsanpas": false,
+      "details_not_set": [
+        "ライセンス",
+        "配布版名",
+        "コマンド体系"
+      ]
+    }
+  },
+  "connectivity": {
+    "primary": "衛星通信",
+    "wifi": "主流の接続手段にはしない",
+    "indoors": "建物側の中継設備",
+    "identity": "端末内蔵認証・記号認証による契約引き継ぎ"
+  },
+  "presentation_note": "製品の個別モデル名・性能・価格は設定しない。ONVAの420 !abyarenは市場参考価格でありモンサンパス製品の価格ではない。"
+}

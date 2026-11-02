@@ -8,7 +8,7 @@ const worlds = [
   "category": "IT / 技術",
   "status": "blue",
   "summary": "携帯通信環、PC、Lunade OS、Womiz OS、衛星通信を紹介する東暦の技術ガイド。",
-  "url": "https://ec2045.github.io/it/",
+  "url": "https://ec2045.github.io/torekiIT/",
   "tags": [
     "IT",
     "OS",
@@ -22,7 +22,7 @@ const worlds = [
   "category": "企業 / IT",
   "status": "blue",
   "summary": "和温陣国のモンサンパス家によるIT企業群。東暦ITの49％を担い、Lunade OS・PC・通信環を手がける。",
-  "url": "https://ec2045.github.io/monsanpas/",
+  "url": "https://ec2045.github.io/torekiIT/mosanpas.html",
   "tags": [
     "企業",
     "IT",

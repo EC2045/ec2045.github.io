@@ -483,6 +483,7 @@ function render() {
   const query = search.value.trim().toLocaleLowerCase(language);
   const type = filter.value;
   const list = worlds.filter(world => {
+    if (world.name === "Symbolencyclopedia") return true; // Permanently featured destination.
     // Search both languages so a query remains useful after changing the display.
     const english = localise(world, 'en');
     const haystack = [world.name, world.jp, world.category, world.summary, ...world.tags,
@@ -492,6 +493,8 @@ function render() {
   const collator = new Intl.Collator(language, { sensitivity: 'base' });
   if (sort.value === 'name') list.sort((a, b) => collator.compare(a.name, b.name));
   if (sort.value === 'type') list.sort((a, b) => collator.compare(text(a.type), text(b.type)) || collator.compare(a.name, b.name));
+  const featuredIndex = list.findIndex(world => world.name === "Symbolencyclopedia");
+  if (featuredIndex > 0) list.unshift(list.splice(featuredIndex, 1)[0]);
   grid.innerHTML = list.length ? list.map(original => {
     const world = localise(original);
     return `
@@ -550,3 +553,4 @@ else window.addEventListener('load', hideLoader, { once: true });
 
 
 })().catch(error => console.error("[portal-i18n]", error));
+

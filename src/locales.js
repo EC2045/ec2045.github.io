@@ -14,7 +14,7 @@ window.PORTAL_LOCALES_READY = (async () => {
     return data;
   }
   await Promise.all(['ja','en'].map(async language => {
-    const response = await fetch(new URL(language+'.lang?v=20261102-it-migration',base));
+    const response = await fetch(new URL(language+'.lang?v=20261111-portal-links',base));
     if(!response.ok) throw new Error('Could not load '+language+'.lang');
     for(const [key,value] of Object.entries(parse(await response.text()))) {
       if(key.startsWith('static.')) (output.static[key.slice(7)] ||= {})[language] = value;

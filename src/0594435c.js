@@ -446,6 +446,16 @@ const worlds = [
     ]
   },
   {
+    name: 'IFECI',
+    jp: 'IFECI 島国公式サイト',
+    type: 'project',
+    category: '国家 / 世界設定',
+    status: 'blue',
+    summary: '和温陣国に隣接する人口約73万人・3州の島国。127声調を持つ標準語や公用語、地域・渡航情報を案内する公式サイト。',
+    url: 'https://ec2045.github.io/ifeci/',
+    tags: ['国家', '言語', '島国']
+  },
+  {
     "name": "MONSANPAS",
     "jp": "モンサンパス公式サイト",
     "type": "organization",
